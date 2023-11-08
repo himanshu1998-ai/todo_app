@@ -1,5 +1,0 @@
-CREATE_TODO = "/create_todo"
-FETCH_ONE_TODO = "/fetch_one_todo"
-FETCH_ALL_TODO = "/fetch_all_todo"
-UPDATE_TODO = "/update_todo"
-DELETE_TODO = "/delete_todo/{todo_id}"
