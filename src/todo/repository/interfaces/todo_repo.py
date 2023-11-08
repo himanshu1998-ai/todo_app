@@ -12,7 +12,7 @@ class ITodoREPO(ABC):
         self._collection = self._database[collection_name]
 
     @abstractmethod
-    async def create_todo(self, todo_id: int, todo: TODOSchema) -> str:
+    async def create_todo(self, todo: TODOSchema) -> str:
         pass
 
     @abstractmethod
@@ -28,6 +28,6 @@ class ITodoREPO(ABC):
         pass
 
     @abstractmethod
-    async def update_todo(self, todo_id: int, todo: TODOSchema) -> str:
+    async def update_todo(self, todo: TODOSchema) -> str:
         pass
 
