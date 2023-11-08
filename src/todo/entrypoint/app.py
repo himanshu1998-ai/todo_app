@@ -1,4 +1,5 @@
 import os
+from fastapi.middleware.cors import CORSMiddleware
 from common.config import CREATE_TODO, FETCH_ONE_TODO, FETCH_ALL_TODO, UPDATE_TODO, DELETE_TODO
 import uvicorn
 from fastapi import FastAPI
@@ -11,7 +12,20 @@ from todo.usecases.update.update_todo import UpdateTodoUsecase
 from todo.usecases.delete.delete_todo import DeleteTodoUsecase
 
 app = FastAPI()
+origins = [
+    "http://localhost:3000",
+]
 
+# what is a middleware?
+# software that acts as a bridge between an operating system or database and applications, especially on a network.
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 repo = TodoStore(db_name=os.getenv("DB_NAME"), collection_name=os.getenv("COLLECTION_NAME"))
 
 
