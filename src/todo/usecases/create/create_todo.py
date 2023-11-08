@@ -6,6 +6,6 @@ class CreateTodoUsecase:
     def __init__(self, repo: ITodoREPO):
         self._repo = repo
 
-    async def execute(self, todo_id: int, todo: TODOSchema) -> str:
-        data = await self._repo.create_todo(todo_id, todo)
+    async def execute(self, todo: TODOSchema) -> str:
+        data = await self._repo.create_todo(todo)
         return data

@@ -28,6 +28,6 @@ class ITodoREPO(ABC):
         pass
 
     @abstractmethod
-    async def update_todo(self, todo: TODOSchema) -> str:
+    async def update_todo(self, todo: dict) -> str:
         pass
 

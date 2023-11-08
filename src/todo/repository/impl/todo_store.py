@@ -40,15 +40,14 @@ class TodoStore(ITodoREPO):
         except Exception as e:
             return f"Exception: {e} occurred while fetching all todos"
 
-    async def update_todo(self, todo: TODOSchema) -> str:
+    async def update_todo(self, todo: dict) -> str:
         try:
-            _todo = await self._collection.find_one({"_id": todo.id})
+            todo_id = todo.pop('id')
+            _todo = await self._collection.find_one({"_id": todo_id})
             if _todo:
-                todo_data = todo.model_dump()
-                todo_data.pop('id')
-                await self._collection.update_one({"_id": todo.id},{"$set": todo_data})
-                return f"update success with data: {todo.model_dump()}"
-            return not_found(detail=f"todo with the id {todo.id} is not valid")
+                await self._collection.update_one({"_id": todo_id}, {"$set": todo})
+                return f"update success with data: {todo}"
+            return not_found(detail=f"todo with the id {todo_id} is not valid")
         except Exception as e:
             return f"Exception: {e} occurred while updating todo"
 

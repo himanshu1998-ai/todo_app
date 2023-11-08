@@ -16,9 +16,9 @@ repo = TodoStore(db_name=os.getenv("DB_NAME"), collection_name=os.getenv("COLLEC
 
 
 @app.post(CREATE_TODO)
-async def create_todo(todo_id: int, todo: TODOSchema):
+async def create_todo(todo: TODOSchema):
     usecase = CreateTodoUsecase(repo=repo)
-    response = await usecase.execute(todo_id=todo_id, todo=todo)
+    response = await usecase.execute(todo=todo)
     return response
 
 
@@ -36,9 +36,9 @@ async def fetch_all_todo():
 
 
 @app.put(UPDATE_TODO)
-async def update_todo(todo_id: int, todo: TODOSchema):
+async def update_todo(todo: TODOSchema):
     usecase = UpdateTodoUsecase(repo=repo)
-    response = await usecase.execute(todo_id=todo_id, todo=todo)
+    response = await usecase.execute(todo=todo)
     return response
 
 
