@@ -29,6 +29,10 @@ function App() {
      axios.post('http://localhost:5007/create_todo', { 'id':  id, 'title': title, 'description': desc })
       .then(res => console.log(res))
 };
+// PUT a todo
+const updateTodoHandler = () => {
+     axios.put("http://localhost:5007/update_todo", {"id": id,  "title": title, "description": desc})
+        .then(res => console.log(res.data)) }
 
   return (
     <div className="App list-group-item  justify-content-center align-items-center mx-auto" style={{"width":"400px", "backgroundColor":"white", "marginTop":"15px"}} >
@@ -41,6 +45,7 @@ function App() {
         <input className="mb-2 form-control titleIn" onChange={event => setTitle(event.target.value)} placeholder='Title'/>
         <input className="mb-2 form-control desIn" onChange={event => setDesc(event.target.value)}   placeholder='Description'/>
       <button className="btn btn-outline-primary mx-2 mb-3" style={{'borderRadius':'50px',"font-weight":"bold"}}  onClick={addTodoHandler}>Add Task</button>
+      <button className="btn btn-outline-primary mx-2 mb-3" style={{'borderRadius':'50px',"font-weight":"bold"}}  onClick={updateTodoHandler}>Update Task</button>
       </span>
       <h5 className="card text-white bg-dark mb-3">Your Tasks</h5>
       <div >
