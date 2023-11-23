@@ -11,28 +11,26 @@ function App() {
   const [id, setId] = useState()
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
-
+  const [refreshKey, setRefreshKey] = useState(0);
 
 
   // Read all todos
   useEffect(() => {
-  (async () => {
-    await axios.get('http://localhost:5007/fetch_all_todo')
+  axios.get('http://localhost:5007/fetch_all_todo')
       .then(res => {
         setTodoList(res.data)
       })
-  })();
-  });
+  }, [refreshKey]);
 
   // Post a todo
   const addTodoHandler = () => {
      axios.post('http://localhost:5007/create_todo', { 'id':  id, 'title': title, 'description': desc })
-      .then(res => console.log(res))
+      .then(res => setRefreshKey(oldKey => oldKey +1))
 };
 // PUT a todo
 const updateTodoHandler = () => {
      axios.put("http://localhost:5007/update_todo", {"id": id,  "title": title, "description": desc})
-        .then(res => console.log(res.data)) }
+        .then(res => setRefreshKey(oldKey => oldKey +1)) }
 
   return (
     <div className="App list-group-item  justify-content-center align-items-center mx-auto" style={{"width":"400px", "backgroundColor":"white", "marginTop":"15px"}} >
